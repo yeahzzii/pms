@@ -1,0 +1,27 @@
+CREATE TABLE project99(
+	prjNo VARCHAR2(30),
+	prjPMName VARCHAR2(20)
+);
+SELECT * FROM PROJECT99 p ;
+CREATE TABLE emp99(
+	empno VARCHAR2(20),
+	ename VARCHAR2(20),
+	phoneNum VARCHAR2(20),
+	deptno VARCHAR(20)
+);
+
+CREATE TABLE dept99(
+	deptno VARCHAR(20),
+	dname VARCHAR2(20),
+	loc VARCHAR2(20)
+);
+
+select d.dname, d.loc, e.phoneNum
+from emp99 e, dept99 d, project99 p
+where d.deptno = e.deptno
+AND e.ename = p.prjPMName
+AND prjNo = 1;
+
+CREATE TABLE test01(
+	yess boolean
+);

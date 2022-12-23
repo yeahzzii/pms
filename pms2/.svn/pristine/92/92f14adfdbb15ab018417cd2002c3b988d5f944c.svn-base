@@ -1,0 +1,12 @@
+package pms.a01_Jongdae.a03_DAO;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import pms.a01_Jongdae.a04_VO.Test;
+
+@Repository
+public interface TestDao {
+	public List<Test> getTestList(Test sch);
+}

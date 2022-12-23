@@ -1,0 +1,17 @@
+package pms.a01_Jongdae.a03_DAO;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import pms.a01_Jongdae.a04_VO.CostPrj;
+import pms.a01_Jongdae.a04_VO.RoadMap;
+import pms.a01_Jongdae.a04_VO.ScopeStatement;
+
+@Repository
+public interface CostNScopeDao {
+	public List<CostPrj> getPrjList(CostPrj sch);
+	public List<RoadMap> getRoadMapList(String prjno);
+	public List<CostPrj> getScPMNPrjInfo(String prjno);
+	public List<ScopeStatement> getScInfo(String prjno);
+}

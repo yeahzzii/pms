@@ -1,0 +1,21 @@
+package pms.a01_Yeji.a03_DAO;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import pms.a01_Haeun.a04_VO.Emp;
+import pms.a01_Yeji.a04_VO.MailOutbox;
+import pms.a01_Yeji.a04_VO.MailOutboxFile;
+import pms.a01_Yeji.a04_VO.MailOutboxSch;
+
+
+@Repository
+public interface MailDao {
+	public List<Emp> mailEmpList(Emp add);
+	public List<MailOutbox> mailOutboxList(MailOutboxSch sch);
+	
+	public void insertOutbox(MailOutbox ins);
+	
+	public void insertFile(MailOutboxFile file);
+}

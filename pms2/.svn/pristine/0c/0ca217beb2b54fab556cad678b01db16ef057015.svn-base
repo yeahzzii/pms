@@ -1,0 +1,39 @@
+package pms.a01_Jongdae.a01_Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import pms.a01_Jongdae.a02_Service.CostNScopeService;
+import pms.a01_Jongdae.a04_VO.CostPrj;
+
+@Controller
+public class CostNScopeController {
+	@Autowired(required = false)
+	private CostNScopeService service;
+	
+	// http://localhost:7080/pms/cosPrjList.do
+	@RequestMapping("cosPrjList.do")
+	public String cosPrjList(CostPrj sch, Model d) {
+		d.addAttribute("costPrjList", service.getPrjList(sch));
+		return "WEB-INF\\views\\a01_Jongdae\\costProjectList.jsp";
+	}
+	// http://localhost:7080/pms/rmList.do
+	// http://localhost:7080/pms/rmList.do?prjno=1
+	@RequestMapping("rmList.do")
+	public String cost(String prjno, Model d) {
+		d.addAttribute("rmList", service.getRoadMapList(prjno));
+		return "WEB-INF\\views\\a01_Jongdae\\costRoadMapList.jsp";
+	}
+	// http://localhost:7080/pms/scope.do?prjno=1
+	@RequestMapping("scope.do")
+	public String scopeInvoice(String prjno, Model d) {
+		d.addAttribute("scPMInfo", service.getScPMNPrjInfo(prjno));
+		d.addAttribute("scInfo", service.getScInfo(prjno));
+		d.addAttribute("rmList", service.getRoadMapList(prjno));
+		return "WEB-INF\\views\\a01_Jongdae\\scopeDocumentation_invoice.jsp";
+	}
+
+
+}

@@ -1,0 +1,25 @@
+package pms.a01_Heonyong.a04_VO;
+
+public class RType {
+    private String riskTypeNo;
+    private String prjNo;
+    public RType() {
+        // TODO Auto-generated constructor stub
+    }
+    public RType(String riskTypeNo, String prjNo) {
+        this.riskTypeNo = riskTypeNo;
+        this.prjNo = prjNo;
+    }
+    public String getRiskTypeNo() {
+        return riskTypeNo;
+    }
+    public void setRiskTypeNo(String riskTypeNo) {
+        this.riskTypeNo = riskTypeNo;
+    }
+    public String getPrjNo() {
+        return prjNo;
+    }
+    public void setPrjNo(String prjNo) {
+        this.prjNo = prjNo;
+    }
+}

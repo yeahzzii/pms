@@ -1,0 +1,43 @@
+package pms.a01_Yeji.a01_Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import pms.a01_Haeun.a04_VO.Emp;
+import pms.a01_Yeji.a02_Service.MailService;
+import pms.a01_Yeji.a04_VO.Mail;
+import pms.a01_Yeji.a04_VO.MailOutboxSch;
+
+
+@Controller
+public class MailController {
+	
+	@Autowired(required = false)
+	private MailService service;
+	// http://localhost:7080/pms/mailForm.do
+	@GetMapping("mailForm.do")
+	public String mailForm() {
+		return "";
+	}
+	
+	@PostMapping("mailSender.do")
+	public String mailSender(Mail mail, Model d) {
+		d.addAttribute("msg", service.sendMail(mail));
+		return "";
+	}
+	
+	
+	// http://localhost:7080/pms/outboxList.do
+	@RequestMapping("outboxList.do")
+	public String outboxList(MailOutboxSch sch, Emp add, Model d) {
+	
+		d.addAttribute("maillist", service.mailOutboxList(sch));
+		d.addAttribute("emplist", service.mailEmpList(add));
+		return "WEB-INF\\views\\a01_Yeji\\outbox.jsp";
+	} 
+	
+}

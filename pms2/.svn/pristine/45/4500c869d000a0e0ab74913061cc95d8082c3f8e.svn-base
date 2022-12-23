@@ -1,0 +1,64 @@
+/*
+CREATE TABLE project99(
+	prjNo VARCHAR2(30),
+	prjName VARCHAR2(50),
+	prjGoal VARCHAR2(200),
+	output VARCHAR2(200),
+	outRange VARCHAR2(200),
+	prjStartDate DATE,
+	prjEndDate DATE,
+	prjFinance NUMBER,
+	prjPMNo VARCHAR2(20),
+	prjImportant VARCHAR2(20),
+	eqpmnCost NUMBER,
+	materialCost NUMBER,
+	serviceCost NUMBER,
+	indirectCost NUMBER,
+	rsrvExpns NUMBER
+);
+*/
+SELECT * FROM PROJECT99 p ;
+CREATE TABLE emp99(
+	empno VARCHAR2(20),
+	id VARCHAR2(20),
+	pw VARCHAR2(20),
+	ename VARCHAR2(20),
+	eimage VARCHAR2(100),
+	birth DATE,
+	job VARCHAR2(20),
+	mgr VARCHAR2(20),
+	hiredate DATE,
+	sal NUMBER,
+	phoneNum VARCHAR2(20),
+	address VARCHAR2(100),
+	gender VARCHAR2(20),
+	email VARCHAR2(100),
+	auth VARCHAR2(20),
+	description VARCHAR2(500),
+	eImportant VARCHAR2(10),
+	deptno VARCHAR2(20)
+);
+
+CREATE TABLE dept99(
+	deptno VARCHAR(20),
+	dname VARCHAR2(20),
+	loc VARCHAR2(20)
+);
+-- 범위기술서 페이지
+select d.dname, d.loc, e.phoneNum
+from emp99 e, dept99 d, project99 p
+where d.deptno = e.deptno
+AND e.ename = p.prjPMName
+AND prjNo = 1;
+
+CREATE TABLE test01(
+	yess boolean
+);
+-- 비용관리 프로젝트 리스트
+SELECT p.*, e.ename
+FROM project99 p, emp99 e
+WHERE p.PRJPMNO = e.EMPNO;
+
+
+
+

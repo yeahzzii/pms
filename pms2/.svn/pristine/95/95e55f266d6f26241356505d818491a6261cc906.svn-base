@@ -1,0 +1,47 @@
+package pms.a01_Yeji.a02_Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+
+
+
+public class MailService {
+	// 컨테이너에 있는 메일 발송 객체 autowiring 처리
+	@Autowired(required = false)
+	private JavaMailSender sender;
+	/*
+	public String sendMail(Mail email) {
+		String msg = "메일 발송 성공"; // 메일 발송이 성공되었을 때, 처리할 메서드 선언
+		// 1. 멀티미디어형 메일 데이터 전송
+		MimeMessage mmsg = sender.createMimeMessage();
+		// 2. 제목 설정
+		try {
+			mmsg.setSubject(email.getTitle());
+			// 3. 수신자 설정
+			mmsg.setRecipient(RecipientType.TO, new InternetAddress(email.getReceiver()));
+			// 4. 내용 설정
+			mmsg.setText(email.getContent());
+			// 5. 발송 처리
+			sender.send(mmsg);
+		} catch (MessagingException e) {
+			System.out.println("## 전송 에러 ##");
+			System.out.println(e.getMessage());
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			msg = "메일 발송 에러:"+e.getMessage();
+			System.out.println(msg);
+		}catch(Exception e) {
+			System.out.println("## 일반 에러 ##");
+			System.out.println(e.getMessage());
+			msg = "일반 에러 발생:"+e.getMessage();
+		}
+		
+		return msg;
+	}
+	*/
+}

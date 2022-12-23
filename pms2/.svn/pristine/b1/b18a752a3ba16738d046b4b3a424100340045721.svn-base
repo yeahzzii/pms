@@ -1,0 +1,31 @@
+package pms.a01_Jongdae.a02_Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import pms.a01_Jongdae.a03_DAO.CostNScopeDao;
+import pms.a01_Jongdae.a04_VO.CostPrj;
+import pms.a01_Jongdae.a04_VO.RoadMap;
+import pms.a01_Jongdae.a04_VO.ScopeStatement;
+
+@Service
+public class CostNScopeService {
+	@Autowired(required = false)
+	private CostNScopeDao dao;
+	
+	public List<CostPrj> getPrjList(CostPrj sch) {
+		return dao.getPrjList(sch);
+	}
+	public List<RoadMap> getRoadMapList(String prjno) {
+		return dao.getRoadMapList(prjno);
+	}
+	public List<CostPrj> getScPMNPrjInfo(String prjno) {
+		return dao.getScPMNPrjInfo(prjno);
+	}
+	public List<ScopeStatement> getScInfo(String prjno) {
+		return dao.getScInfo(prjno);
+	}
+	
+}

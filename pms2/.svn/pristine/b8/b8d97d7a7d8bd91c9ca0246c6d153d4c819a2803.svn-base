@@ -1,0 +1,25 @@
+package pms.a01_Jangho.a02_Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import pms.a01_Haeun.a04_VO.Emp;
+import pms.a01_Jangho.a03_DAO.EmpDao;
+
+@Service
+public class EmpService {
+	@Autowired(required=false)
+	private EmpDao dao;
+	public int checkEmp(String id) {
+		return dao.checkEmp(id);
+	}
+	public Emp getEmp(Emp e) {
+		return dao.getEmp(e);
+	}
+	
+	// 회원가입
+	public void insertEmp(Emp ins) {
+		dao.insertEmp(ins); 
+	}
+	
+}

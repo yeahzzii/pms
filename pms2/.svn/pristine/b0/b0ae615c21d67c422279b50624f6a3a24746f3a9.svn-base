@@ -1,0 +1,84 @@
+package pms.a01_Jangho.a01_Controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import pms.a01_Jangho.a02_Service.EmpService;
+import pms.a01_Haeun.a04_VO.Emp;
+
+@SessionAttributes("emp")
+@Controller
+public class EmpController {
+	@Autowired(required=false)
+	private EmpService service;
+	
+	@ModelAttribute("emp")
+	public Emp getEmp() {
+		return new Emp();
+	}
+	
+	// 회원가입 약관 동의 화면 register01.jsp
+	// http://localhost:7080/pms/register01.do
+	@RequestMapping("register01.do")
+	public String register01() {
+		return "WEB-INF\\views\\a01_Jangho\\register01.jsp";
+	}
+	
+	// 회원가입 정보 입력 화면 register02.jsp
+	// http://localhost:7080/pms/register02.do
+	@RequestMapping("register02.do")
+	public String register02() {
+		return "WEB-INF\\views\\a01_Jangho\\register02.jsp";
+	}
+
+	// 회원가입 성공 화면 register03.jsp
+	// http://localhost:7080/pms/register03.do
+	@RequestMapping("register03.do")
+	public String register03() {
+		return "WEB-INF\\views\\a01_Jangho\\register03.jsp";
+	}
+	
+	// ajax 처리 pageJsonReport
+	@RequestMapping("hasEmp.do")
+	public String hasEmp(@RequestParam("id") String id, Model d) {
+		// 해당 회원이 있을 때 true, 없을 때 false
+		d.addAttribute("hasEmp", service.checkEmp(id) == 0 ? false : true);
+		return "pageJsonReport";
+	}
+	
+	// 로그인 화면 login01.jsp
+	// http://localhost:7080/pms/login.do
+	@RequestMapping("login.do")
+	public String login(@ModelAttribute("emp") Emp e,
+			HttpServletRequest request) {
+		if(e.getId() != null) {
+			Emp emp = service.getEmp(e);
+			System.out.println(e.getEname());
+			HttpSession session = request.getSession();
+			if(e != null) { // DB에 데이터가 있을 때 session 처리
+				session.setAttribute("e", e);
+			}
+			// 로그아웃 시
+			// session.removeAttribute("e");
+		}
+		
+		return "WEB-INF\\views\\a01_Jangho\\login01.jsp";
+	}
+	
+	// 프로필 화면 profile_main.jsp
+	// http://localhost:7080/pms/profile.do
+	@RequestMapping("profile.do")
+	public String profile() {
+		return "WEB-INF\\views\\a01_Jangho\\profile_main.jsp";
+	}
+	
+
+}

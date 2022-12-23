@@ -1,0 +1,57 @@
+-- 위험관리 테이블
+CREATE TABLE riskManagementPlan(
+riskNo varchar2(50) NOT NULL PRIMARY KEY,
+prjNo varchar2(30),
+riskTypeNo varchar2(30),
+riskDeg varchar2(50),
+riskContent varchar2(500),
+regDate DATE,
+occuRate NUMBER,
+registrant varchar2(50),
+riskEffect varchar2(500),
+riskAPlan varchar2(500),
+actionDate DATE
+);
+
+INSERT INTO riskManagementPlan values(riskNo_seq.nextval,1,'ER-101','상','시간내에 프로젝트 완료를 하지못함',sysdate,3,
+'관리자 이헌용','기간내에 프로젝트 완성률이 높아짐','프로젝트 기간을 늘린다',sysdate)
+
+-- 프로젝트 테이블
+CREATE TABLE project(
+prjNo varchar2(30) NOT NULL PRIMARY KEY,
+prjName varchar2(30),
+prjGoal varchar2(200),
+OUTPUT varchar2(200),
+outrange varchar2(200),
+prjStartDate DATE,
+prjEndDate DATE,
+prjFinance NUMBER,
+prjPMName varchar2(20),
+prjImportant varchar2(20)
+);
+
+
+
+
+INSERT INTO project values(prjNo_seq.nextval,'프로젝트명','목적','결과물','범위 외',sysdate,sysdate,'500000','PM명','상');
+
+
+
+CREATE SEQUENCE riskNo_seq
+START WITH 1
+INCREMENT BY 1
+
+CREATE SEQUENCE prjNo_seq
+START WITH 1
+INCREMENT BY 1
+
+SELECT * FROM riskmanagementplan ;
+SELECT * FROM project ;
+
+DROP SEQUENCE riskNo_seq;
+DROP SEQUENCE prjNo_seq;
+DROP TABLE riskManagementPlan;
+DROP TABLE project;
+
+
+ALTER TABLE riskManagementPlan ADD CONSTRAINT fk_prjNo foreign KEY(prjNo) references project (prjNo);

@@ -1,0 +1,30 @@
+package pms.a01_Jongdae.a01_Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import pms.a01_Jongdae.a02_Service.testService;
+import pms.a01_Jongdae.a04_VO.Test;
+
+@Controller
+public class CostNScopeController {
+	@Autowired(required = false)
+	private testService service;
+	
+	// http://localhost:7080/pms/riskManagement.do
+	@RequestMapping("riskManagement.do")
+	public String testList(Test sch, Model d) {
+
+		return "webapp\\a01_Heonyong\\00.riskManagement.jsp";
+	}
+	
+	// http://localhost:7080/pms/scope.do
+	@RequestMapping("scope.do")
+	public String testList2(Test sch, Model d) {
+
+		return "WEB-INF\\views\\a01_Jongdae\\scopeDocumentation_invoice.jsp";
+	}
+
+}

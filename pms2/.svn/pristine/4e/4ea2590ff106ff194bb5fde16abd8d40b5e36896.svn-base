@@ -1,0 +1,22 @@
+package pms.a01_Jongdae.a04_VO;
+
+public class Test {
+	private String testid;
+	private String testpw;
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+	public String getTestid() {
+		return testid;
+	}
+	public void setTestid(String testid) {
+		this.testid = testid;
+	}
+	public String getTestpw() {
+		return testpw;
+	}
+	public void setTestpw(String testpw) {
+		this.testpw = testpw;
+	}
+	
+}

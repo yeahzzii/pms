@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pms.a01_Jongdae.a03_DAO.CostNScopeDao">
+	<select id="getPrjList" resultType="costprj" parameterType="costprj">
+		SELECT p.*, e.ename
+		FROM PROJECT99 p, EMP99 e, SCOPESTMT99 s
+		WHERE p.PRJPMNO = e.empno
+		AND p.prjno = s.prjno
+		AND s.ISAPPROVAL = '승인'
+	</select>
+	<select id="getPrj" resultType="costprj" parameterType="string">
+		SELECT p.*, e.ename
+		FROM PROJECT99 p, EMP99 e, SCOPESTMT99 s
+		WHERE p.PRJPMNO = e.empno
+		AND p.prjno = #{prjno}
+		AND p.prjno = s.prjno
+		AND s.ISAPPROVAL = '승인'
+	</select>
+	<select id="getScPrj" resultType="costprj" parameterType="string">
+		SELECT *
+		FROM PROJECT99
+		WHERE prjno = #{prjno}
+	</select>
+	<select id="getRoadMapList" resultType="roadmap" parameterType="string">
+		SELECT r.*, p.prjName
+		FROM ROADMAP99 r, PROJECT99 p, SCOPESTMT99 s
+		WHERE r.prjno = p.prjno
+		AND r.prjno = #{prjno}
+		and p.prjno = s.prjno
+		AND s.ISAPPROVAL = '승인'
+	</select>
+	<select id="getScRMList" resultType="roadmap" parameterType="string">
+		SELECT *
+		FROM ROADMAP99
+		WHERE prjno = #{prjno}
+	</select>
+	<select id="getPMInfo" resultType="pminfo" parameterType="string">
+		SELECT e.ename, e.phoneNum, d.dname, d.loc
+		FROM project99 p, emp99 e, dept99 d
+		WHERE p.prjPMNo = e.empno
+		AND p.prjno = #{prjno}
+		AND e.deptno = d.deptno
+	</select>
+	<select id="getScInfo" resultType="scopestmt" parameterType="string">
+		SELECT *
+		FROM SCOPESTMT99
+		WHERE prjno = #{prjno}
+	</select>
+	<select id="getHCostList" resultType="hcost" parameterType="hcost">
+		SELECT p.prjno, SUM(e.sal) hsal
+		FROM PRJEMPLIST99 p, EMP99 e
+		WHERE p.empno = e.empno
+		GROUP BY p.prjno
+	</select>
+	<select id="getPrjHCostList" resultType="prjhcostlist" parameterType="string">
+		SELECT e.ename, e.gender, e.job, e.sal, p.prjno
+		FROM EMP99 e, PRJEMPLIST99 p, scopeStmt99 s
+		WHERE p.prjno = #{prjno}
+		AND p.prjno = s.prjno
+		AND p.empno = e.empno
+		AND s.ISAPPROVAL = '승인'
+	</select>
+	<select id="getHCostSum" resultType="hcostsum" parameterType="string">
+		SELECT a.*, p3.PRJENDDATE-p3.PRJSTARTDATE+1 prjPeriod
+		FROM (
+			SELECT p.prjno, sum(e.sal) hsal
+			FROM PROJECT99 p, PRJEMPLIST99 p2, EMP99 e 
+			WHERE p2.empno = e.empno
+			AND p2.prjno = #{prjno}
+			GROUP BY p.prjno) a, project99 p3
+		WHERE a.prjno = p3.prjno
+	</select>
+	<update id="yesScopeStmt" parameterType="string">
+		UPDATE scopeStmt99
+			SET isApproval = '승인'
+		WHERE scpStmtNo = #{scpStmtNo}
+	</update>
+	<update id="noScopeStmt" parameterType="string">
+		UPDATE scopeStmt99
+			SET isApproval = '반려'
+		WHERE scpStmtNo = #{scpStmtNo}
+	</update>
+	
+	<!-- 위험관리 리스트 검토계획에서 -->
+	<select id="getRiskList" resultType="risk" parameterType="string">
+		SELECT r.*, rt.RISKTYPENAME
+		FROM risk99 r, RISKTYPE99 rt
+		WHERE r.rplanno = #{rplanno}
+		AND rt.risktypeno = r.risktypeno
+	</select>
+	<insert id="insertRisk" parameterType="risk">
+		INSERT INTO risk99 values(
+		'R'||risk_seq.nextval, #{riskDeg}, #{riskContent}, sysdate, #{registrant}, #{riskTypeNo}, #{rplanno})
+	</insert>
+	<delete id="deleteRisk" parameterType="string">
+		DELETE
+		FROM risk99
+		WHERE riskno = #{riskNo}
+	</delete>
+	<select id="getRiskDetail" resultType="risk" parameterType="string">
+		SELECT r.*, rt.RISKTYPENAME
+		FROM risk99 r, RISKTYPE99 rt
+		WHERE RISKNO = #{riskNo}
+		AND r.RISKTYPENO = rt.RISKTYPENO
+	</select>
+	
+</mapper>

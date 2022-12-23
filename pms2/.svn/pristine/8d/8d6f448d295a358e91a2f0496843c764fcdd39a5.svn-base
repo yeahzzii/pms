@@ -1,0 +1,116 @@
+package pms.a01_Heonyong.a04_VO;
+
+import java.util.Date;
+
+public class RPlan {
+    private String riskNo;
+    private String riskDeg;
+    private String riskContent;
+    private Date regDate;
+    private int occuRate;
+    private int influence;
+    private String registrant;
+    private String riskMPlan;
+    private String riskEffect;
+    private String riskAPlan;
+    private Date actionDate;
+    private String riskTypeNo;
+    private String prjNo;
+    public RPlan() {
+    }
+    public RPlan(String riskNo, String riskDeg, String riskContent, Date regDate, int occuRate, int influence,
+            String registrant, String riskMPlan, String riskEffect, String riskAPlan, Date actionDate,
+            String riskTypeNo, String prjNo) {
+        this.riskNo = riskNo;
+        this.riskDeg = riskDeg;
+        this.riskContent = riskContent;
+        this.regDate = regDate;
+        this.occuRate = occuRate;
+        this.influence = influence;
+        this.registrant = registrant;
+        this.riskMPlan = riskMPlan;
+        this.riskEffect = riskEffect;
+        this.riskAPlan = riskAPlan;
+        this.actionDate = actionDate;
+        this.riskTypeNo = riskTypeNo;
+        this.prjNo = prjNo;
+    }
+    public String getRiskNo() {
+        return riskNo;
+    }
+    public void setRiskNo(String riskNo) {
+        this.riskNo = riskNo;
+    }
+    public String getRiskDeg() {
+        return riskDeg;
+    }
+    public void setRiskDeg(String riskDeg) {
+        this.riskDeg = riskDeg;
+    }
+    public String getRiskContent() {
+        return riskContent;
+    }
+    public void setRiskContent(String riskContent) {
+        this.riskContent = riskContent;
+    }
+    public Date getRegDate() {
+        return regDate;
+    }
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
+    public int getOccuRate() {
+        return occuRate;
+    }
+    public void setOccuRate(int occuRate) {
+        this.occuRate = occuRate;
+    }
+    public int getInfluence() {
+        return influence;
+    }
+    public void setInfluence(int influence) {
+        this.influence = influence;
+    }
+    public String getRegistrant() {
+        return registrant;
+    }
+    public void setRegistrant(String registrant) {
+        this.registrant = registrant;
+    }
+    public String getRiskMPlan() {
+        return riskMPlan;
+    }
+    public void setRiskMPlan(String riskMPlan) {
+        this.riskMPlan = riskMPlan;
+    }
+    public String getRiskEffect() {
+        return riskEffect;
+    }
+    public void setRiskEffect(String riskEffect) {
+        this.riskEffect = riskEffect;
+    }
+    public String getRiskAPlan() {
+        return riskAPlan;
+    }
+    public void setRiskAPlan(String riskAPlan) {
+        this.riskAPlan = riskAPlan;
+    }
+    public Date getActionDate() {
+        return actionDate;
+    }
+    public void setActionDate(Date actionDate) {
+        this.actionDate = actionDate;
+    }
+    public String getRiskTypeNo() {
+        return riskTypeNo;
+    }
+    public void setRiskTypeNo(String riskTypeNo) {
+        this.riskTypeNo = riskTypeNo;
+    }
+    public String getPrjNo() {
+        return prjNo;
+    }
+    public void setPrjNo(String prjNo) {
+        this.prjNo = prjNo;
+    }
+}

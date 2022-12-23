@@ -1,0 +1,23 @@
+package pms.a01_Jongdae.a01_Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import pms.a01_Jongdae.a02_Service.testService;
+import pms.a01_Jongdae.a04_VO.Test;
+
+@Controller
+public class testCtrl {
+	@Autowired(required = false)
+	private testService service;
+	// http://106.10.18.69:5050/pms/test.do
+	// http://localhost:7080/pms/test.do
+	@RequestMapping("test.do")
+	public String testList(Test sch, Model d) {
+		d.addAttribute("testList", service.getTestList(sch));
+		return "WEB-INF\\views\\a01_Jongdae\\test.jsp";
+	}
+
+}

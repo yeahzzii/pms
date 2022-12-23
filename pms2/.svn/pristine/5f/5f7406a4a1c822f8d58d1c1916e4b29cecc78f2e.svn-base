@@ -1,0 +1,19 @@
+package pms.a01_Jongdae.a02_Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import pms.a01_Jongdae.a03_DAO.CostNScopeDao;
+import pms.a01_Jongdae.a04_VO.CostPrj;
+
+@Service
+public class CostNScopeService {
+	@Autowired(required = false)
+	private CostNScopeDao dao;
+	
+	public List<CostPrj> getPrjList(CostPrj sch) {
+		return dao.getPrjList(sch);
+	}
+}

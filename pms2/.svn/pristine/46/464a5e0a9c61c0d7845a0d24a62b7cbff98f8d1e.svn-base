@@ -1,0 +1,41 @@
+package pms.a01_Sechan.a02_Service;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+
+import pms.a01_Sechan.a03_DAO.rplanDao;
+import pms.a01_Sechan.a04_VO.Reviewplan;
+import pms.a01_Sechan.a04_VO.feedback;
+
+@Service
+public class rplanService {
+	@Autowired(required=false)
+	private rplanDao dao;
+	
+	public List<Reviewplan> rplanList(Reviewplan sch){
+		return dao.rplanList(sch);
+	}
+	
+	public List<feedback> fbplanList(feedback sch){
+		return dao.fbplanList(sch);
+	}
+	
+	public void insertrplan(Reviewplan ins) {
+		dao.insertrplan(ins);	
+	}
+	
+	public void deleteRplan(int rplanno) {
+		dao.deleteRplan(rplanno);
+	}
+	
+	public Reviewplan getRplanDetail(int rplanno) {
+		return dao.getRplanDetail(rplanno);
+	}
+	
+}

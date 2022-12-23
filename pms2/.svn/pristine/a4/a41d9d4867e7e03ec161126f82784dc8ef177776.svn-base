@@ -1,0 +1,77 @@
+package pms.a01_Yeji.a01_Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+import pms.a01_Haeun.a04_VO.Emp;
+import pms.a01_Yeji.a02_Service.MailService;
+import pms.a01_Yeji.a04_VO.Mail;
+import pms.a01_Yeji.a04_VO.Outbox;
+import pms.a01_Yeji.a04_VO.OutboxSch;
+
+
+@Controller
+public class MailController {
+	
+	@Autowired(required = false)
+	private MailService service;
+	// http://localhost:7080/pms/mailForm.do
+	@GetMapping("mailForm.do")
+	public String mailForm() {
+		return "WEB-INF\\views\\a01_Yeji\\mail_compose.jsp";
+	}
+	
+	@PostMapping("mailSender.do")
+	public String mailSender(Mail mail, Model d) {
+		d.addAttribute("msg", service.sendMail(mail));
+		return "WEB-INF\\views\\a01_Yeji\\mail_compose.jsp";
+	}
+	
+	@RequestMapping("outboxList.do")
+	public String outboxList(OutboxSch sch, Model d) {
+		// Board sch : 요청값 받아서 service단에 전달
+		
+		// 서비스에서 바다온 ArrayList<Board> 객체를 blist라는 모델명으로 view단에 넘길 준비
+		d.addAttribute("mlist", service.mailOutboxList(sch));
+		
+		return "WEB-INF\\views\\a01_Yeji\\outbox.jsp";
+	}
+	// mailform.do가 insertform 역할
+	// outboxInsert.do -> 메일폼을 임시보관함으로 저장(등록)
+	@RequestMapping("outboxInsert.do")
+	public String outboxInsert(Outbox ins, Model d){
+		service.insertOutbox(ins); // 데이터 입력 처리                                      
+		d.addAttribute("isInsert","Y");
+		return "WEB-INF\\views\\a01_Yeji\\mail_compose.jsp";
+	}
+	@RequestMapping("outboxDetail.do")
+	public String outboxDetail(@RequestParam("mailNum") int mailNum, Model d){
+		// service.deleteBoard(no);
+		d.addAttribute("board",service.getOutboxDetail(mailNum));
+		
+		return "WEB-INF\\views\\a01_Yeji\\mail_detail.jsp";
+	}
+	
+	@RequestMapping("updateOutbox.do")
+	public String updateOutbox(Outbox upt, Model d) {
+		System.out.println("수정:"+upt.getMailTitle());
+		d.addAttribute("outbox", service.updateOutbox(upt));
+		d.addAttribute("proc","upt");
+		return "WEB-INF\\views\\a01_Yeji\\mail_detail.jsp";
+	}
+	
+	@RequestMapping("deleteOutbox.do")
+	public String deleteOutbox(@RequestParam("mailNum") int mailNum, Model d) {
+		System.out.println("삭제:"+mailNum);
+		d.addAttribute("proc","del");
+		service.deleteOutbox(mailNum);
+		return "WEB-INF\\views\\a01_Yeji\\mail_detail.jsp";
+	}
+	
+}

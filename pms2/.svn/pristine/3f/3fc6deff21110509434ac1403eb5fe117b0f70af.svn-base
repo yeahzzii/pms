@@ -1,0 +1,190 @@
+CREATE TABLE project99(
+	prjNo VARCHAR2(30),
+	prjName VARCHAR2(50),
+	prjGoal VARCHAR2(200),
+	output VARCHAR2(200),
+	outRange VARCHAR2(200),
+	prjStartDate DATE,
+	prjEndDate DATE,
+	prjFinance NUMBER,
+	prjPMNo VARCHAR2(20),
+	prjImportant VARCHAR2(20),
+	eqpmnCost NUMBER,
+	materialCost NUMBER,
+	serviceCost NUMBER,
+	indirectCost NUMBER,
+	rsrvExpns NUMBER
+);
+
+SELECT * FROM PROJECT99 p ;
+
+INSERT INTO project99 values(
+	'1', '프로젝트에이', '목적a', '결과물a', '범위 외a', '2022-07-07', '2022-08-08', 3000, '1', '중요도a',
+	0, 0, 0, 0, 0
+);
+
+CREATE TABLE emp99(
+	empno VARCHAR2(20),
+	id VARCHAR2(20),
+	pw VARCHAR2(20),
+	ename VARCHAR2(20),
+	eimage VARCHAR2(100),
+	birth DATE,
+	job VARCHAR2(20),
+	mgr VARCHAR2(20),
+	hiredate DATE,
+	sal NUMBER,
+	phoneNum VARCHAR2(20),
+	address VARCHAR2(100),
+	gender VARCHAR2(20),
+	email VARCHAR2(100),
+	auth VARCHAR2(20),
+	description VARCHAR2(500),
+	eImportant VARCHAR2(10),
+	deptno VARCHAR2(20)
+);
+SELECT * FROM emp99;
+INSERT INTO emp99 values(
+	'1', 'abc', 'abc', '김씨', '없음', '1999-09-09', 'PM', '11', '2020-07-07', 400,
+	'010-010-0101', '서울 동작구', '남', 'abc@abc.com', 'pm', 'description', '중요함', '10'
+);
+
+
+CREATE TABLE dept99(
+	deptno VARCHAR(20),
+	dname VARCHAR2(20),
+	loc VARCHAR2(20)
+);
+
+INSERT INTO dept99 values(
+	'10', '아이티사업부', '서울 신림동'
+);
+
+CREATE TABLE roadMap99(
+	rmNo VARCHAR2(20),
+	prjNo VARCHAR2(30),
+	rmName VARCHAR2(50),
+	rmStartDate DATE,
+	rmEndDate DATE,
+	rmCost NUMBER
+);
+INSERT INTO roadMap99 values(
+	'1', '1', '1번로드맵', '2022-05-14', '2022-05-20', 700
+);
+INSERT INTO roadMap99 values(
+	'2', '1', '2번로드맵', '2022-05-21', '2022-05-25', 400
+);
+INSERT INTO roadMap99 values(
+	'3', '1', '3번로드맵', '2022-05-26', '2022-06-10', 1000
+);
+
+CREATE TABLE scopeStmt99(
+	scpStmtNo VARCHAR2(30),
+	scpStmtDate DATE,
+	adtnlCntntTitle VARCHAR2(50),
+	adtnlCntnt VARCHAR2(1000),
+	isApproval VARCHAR2(50),
+	prjNo VARCHAR2(30)
+);
+
+INSERT INTO scopeStmt99 values(
+	'1010', '2022-07-07', ' 세부내용제목a', '세부내용a', '승인대기', '1'
+);
+
+
+-- 범위기술서 페이지(scInfo)
+select s.*, d.dname, d.loc
+from emp99 e, dept99 d, project99 p, scopeStmt99 s
+where d.deptno = e.deptno
+AND e.empno = p.prjpmno
+AND p.prjno = 1;
+--scPMInfo
+SELECT p.*, e.ename, e.phoneNum
+FROM project99 p, emp99 e
+WHERE prjno = 1;
+
+-- 비용관리 프로젝트 리스트
+SELECT p.*, e.ename, e.phoneNum
+FROM project99 p, emp99 e
+WHERE p.PRJPMNO = e.EMPNO;
+
+--프로젝트에서 로드맵 불러오기
+SELECT r.*, p.prjName
+FROM roadmap99 r, project99 p
+WHERE r.prjno = p.prjno
+and p.prjno = 1;
+
+---------------------------------------
+CREATE TABLE project99(
+	prjNo VARCHAR2(30),
+	prjName VARCHAR2(50),
+	prjGoal VARCHAR2(200),
+	output VARCHAR2(200),
+	outRange VARCHAR2(200),
+	prjStartDate DATE,
+	prjEndDate DATE,
+	prjFinance NUMBER,
+	prjPMNo VARCHAR2(20),
+	prjImportant VARCHAR2(20),
+	eqpmnCost NUMBER,
+	materialCost NUMBER,
+	serviceCost NUMBER,
+	indirectCost NUMBER,
+	rsrvExpns NUMBER
+);
+
+SELECT * FROM PROJECT99 p ;
+
+INSERT ALL
+INTO project99 values(
+	'1', '프로젝트에이', '목적a', '결과물a', '범위 외a', '2022-05-14', '2022-06-10', 2100, '1', '중요도a',
+	0, 0, 0, 0, 0)
+INTO project99 values(
+	'2', '프로젝트비', '목적b', '결과물b', '범위 외b', '2022-07-15', '2022-10-08', 1100, '2', '중요도b',
+	0, 0, 0, 0, 0)
+INTO project99 values(
+	'3', '프로젝트씨', '목적c', '결과물c', '범위 외c', '2022-06-07', '2022-08-25', 860, '3', '중요도c',
+	0, 0, 0, 0, 0)
+INTO project99 values(
+	'4', '프로젝트디', '목적d', '결과물d', '범위 외d', '2022-02-07', '2022-04-08', 2200, '4', '중요도d',
+	0, 0, 0, 0, 0)
+SELECT * FROM dual;
+
+CREATE TABLE roadMap99(
+	rmNo VARCHAR2(20),
+	prjNo VARCHAR2(30),
+	rmName VARCHAR2(50),
+	rmStartDate DATE,
+	rmEndDate DATE,
+	rmCost NUMBER
+);
+INSERT ALL
+INTO roadMap99 values(
+	'1', '1', '1번로드맵', '2022-05-14', '2022-05-20', 700)
+INTO roadMap99 values(
+	'2', '1', '2번로드맵', '2022-05-21', '2022-05-25', 400)
+INTO roadMap99 values(
+	'3', '1', '3번로드맵', '2022-05-26', '2022-06-10', 1000)
+INTO roadMap99 values(
+	'1', '2', '1번로드맵', '2022-07-15', '2022-07-20', 600)
+INTO roadMap99 values(
+	'2', '2', '2번로드맵', '2022-07-21', '2022-08-25', 400)
+INTO roadMap99 values(
+	'3', '2', '3번로드맵', '2022-08-26', '2022-10-08', 100)
+INTO roadMap99 values(
+	'1', '3', '1번로드맵', '2022-06-07', '2022-06-20', 700)
+INTO roadMap99 values(
+	'2', '3', '2번로드맵', '2022-06-21', '2022-07-25', 40)
+INTO roadMap99 values(
+	'3', '3', '3번로드맵', '2022-07-26', '2022-08-25', 120)
+INTO roadMap99 values(
+	'1', '4', '1번로드맵', '2022-02-07', '2022-02-20', 750)
+INTO roadMap99 values(
+	'2', '4', '2번로드맵', '2022-02-21', '2022-03-25', 650)
+INTO roadMap99 values(
+	'3', '4', '3번로드맵', '2022-03-26', '2022-04-08', 800)
+SELECT * FROM dual;
+
+
+
+

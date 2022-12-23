@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="pms.a01_Haeun.a03_DAO.HRDao">
+	<!-- 직원 검색 -->
+	<select id="getEmpList" resultType="emp" parameterType="emp">
+		SELECT * 
+		FROM AEAPEMP 
+		WHERE 1=1
+		<if test="ename != null">  
+		AND ename LIKE '%'||#{ename}||'%' 
+		</if>
+		<if test="job != null">  
+		AND job LIKE '%'||#{job}||'%' 
+		</if>
+	</select>
+	
+	<!-- 직원 상세 정보 -->
+	<!-- public Emp getDetail(String empno); -->
+	<select id="getDetail" parameterType="string" resultType="emp">
+		select *
+		from AEAPEMP
+		WHERE empno = #{empno}	
+	</select>
+	
+	<!-- 직원 정보 입력 -->
+	<!-- public void insertEmp(Emp ins); -->
+	<insert id="insertEmp" parameterType="emp">
+		INSERT INTO AEAPEMP values(#{empno}, #{id}, #{pw}, #{ename}, #{eimage}, to_date(#{birthS},'YYYY-MM-DD'), #{job}, #{mgr},
+		to_date(#{hiredateS}, 'YYYY-MM-DD'), #{sal}, #{phoneNum}, #{address}, #{deptno}, #{gender}, #{email}, #{auth}, #{description})
+	</insert>
+	
+	<!-- 직원 (사진)파일 업로드 -->
+	<!-- public void insertFile(EmpFile file) -->
+	<insert id="insertFile" parameterType="empfile">
+		insert into empfile values(0,
+		#{path}, #{fname}, sysdate, sysdate, '')
+	</insert>	
+	
+	<!-- 직원 정보 수정 -->
+	<!-- public void updateEmp(Emp upt); -->
+	<update id="updateEmp" parameterType="emp">
+		UPDATE AEAPEMP 
+		SET deptno = #{deptno},
+			job = #{job},
+			sal = #{sal},
+			auth = #{auth},
+			address = #{address},
+			phoneNum = #{phoneNum},
+			email = #{email}
+		WHERE empno = #{empno}	
+	</update>
+	
+	<!-- 직원 정보 삭제 -->
+	<!-- public void deleteEmp(int empno); -->
+	<delete id="deleteEmp" parameterType="string">
+		DELETE 
+		FROM AEAPEMP 
+		WHERE empno = #{empno}
+	</delete>
+</mapper>
+

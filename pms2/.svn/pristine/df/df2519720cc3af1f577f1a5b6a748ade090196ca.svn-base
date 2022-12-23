@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pms.a01_Jongdae.a03_DAO.CostNScopeDao">
+	<select id="getPrjList" resultType="costprj" parameterType="costprj">
+		SELECT p.*, e.ename
+		FROM project99 p, emp99 e
+		WHERE p.PRJPMNO = e.EMPNO
+	</select>
+	<select id="getCostList" resultType="roadmap" parameterType="roadmap">
+		SELECT *
+		FROM roadMap99
+		WHERE prjno = #{prjno}
+	</select>
+</mapper>

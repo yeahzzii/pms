@@ -1,0 +1,24 @@
+package pms.a01_Haeun.a02_Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import pms.a01_Haeun.a03_DAO.HRDao;
+import pms.a01_Haeun.a04_VO.Emp;
+
+@Service
+public class HRService {
+	@Autowired(required=false)
+	private HRDao daoHR;
+	
+	// 직원 검색
+	public List<Emp> getEmpList(Emp sch){
+		return daoHR.getEmpList(sch);
+	}	
+	// 직원 상세 정보
+	public Emp getEmpDetail(String empno) {
+		return daoHR.getDetail(empno);
+	}
+}
