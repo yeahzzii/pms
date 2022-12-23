@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="teamproject5.a01_Jangho.a03_DAO.JanghoDao">
+	<select id="getFreeBoardList" resultType="freeboard" parameterType="freeboard">
+		select *
+		from freeBoard
+		<if test="searchWord != null and searchWord !=''">
+			<choose>
+				<when test="searchType == 'freeTitle'">
+					where freeTitle LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'freeWriter'">
+					where freeWriter LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'freeContent'">
+					where freeContent LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'freeTitleContent'">
+					where freeTitle LIKE '%' || #{searchWord} || '%'
+					OR freeContent LIKE '%' || #{searchWord} || '%'
+				</when>
+			</choose>
+		</if>
+		order by regdte desc
+	</select>
+	<insert id="insertFreeBoard" parameterType="freeboard">
+		insert into freeBoard
+			values(freeBoard_seq.nextval, #{freeTitle}, #{freeWriter}, 0, sysdate, sysdate, #{freeContent})
+	</insert>
+	<select id="getFreeBoardDetail" resultType="freeboard" parameterType="int">
+		select *
+		from freeBoard
+		where freeNum = #{freeNum}
+	</select>
+	<update id="readCountup" parameterType="int">
+		update freeBoard
+			set readcnt = readcnt + 1
+		where freeNum = #{freeNum}
+	</update>
+	<select id="getFreeBoardDetailUpdate" resultType="freeboard" parameterType="int">
+		select *
+		from freeBoard
+		where freeNum = #{freeNum}
+	</select>
+	<update id="updateFreeBoard" parameterType="freeboard">
+		UPDATE freeBoard
+			SET freeTitle = #{freeTitle}, 
+				freeContent = #{freeContent},
+				uptdte = sysdate
+		WHERE freeNum = #{freeNum}
+	</update>
+	<delete id="deleteFreeBoard" parameterType="int">
+		delete from freeBoard
+		where freeNum = #{freeNum}
+	</delete>
+	
+	
+	<select id="getMembersInfo" resultType="members" parameterType="string">
+		SELECT *
+		FROM members
+		WHERE id = #{id}
+	</select>
+	<update id="updateMembersInfo" parameterType="Members">
+		UPDATE members
+			SET pw = #{pw},
+				name = #{name},
+				phonenum = #{phonenum},
+				birth = #{birth},
+				email = #{email}
+		WHERE id = #{id}
+	</update>
+	<delete id="deleteMembersInfo" parameterType="string">
+		DELETE FROM members
+		WHERE id = #{id}
+	</delete>
+	
+</mapper>

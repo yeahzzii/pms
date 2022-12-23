@@ -1,0 +1,22 @@
+package teamproject5.a01_sechan.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
+import teamproject5.a01_sechan.Service.ProjectService;
+import teamproject5.a01_sechan.VO.Quiz;
+
+@Controller
+public class ProjectController {
+	@Autowired(required=false)
+	private ProjectService service;
+	// http://localhost:7080/teamproject5/problemList.do
+		@RequestMapping("problemList.do")
+		public String problemList(Quiz sch, Model d) {
+			d.addAttribute("problem",service.getProblemlist(sch));
+			return "WEB-INF\\views\\a01_problemList.jsp";
+		}
+}

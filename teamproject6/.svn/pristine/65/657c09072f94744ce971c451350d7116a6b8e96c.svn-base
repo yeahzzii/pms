@@ -1,0 +1,13 @@
+package teamproject5.a01_sechan.DAO;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import teamproject5.a01_sechan.VO.Quiz;
+
+@Repository
+public interface ProjectDao {
+	List<Quiz> getProblemlist(Quiz sch);
+
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="teamproject5.a01_Haeun.DAO.VideoDao">
+
+	<!-- 영상자료 -->
+	<select id="getVideoList" resultType="video" parameterType="video">
+		SELECT * 
+		FROM VIDEO 
+		WHERE 1=1
+		<if test="title != null">  
+		AND title LIKE '%'||#{title}||'%'
+		ORDER BY pubdate
+		</if>
+	</select>
+	
+	<select id="getVideoListPubdate" resultType="video" parameterType="video">
+		SELECT * 
+		FROM VIDEO 
+		WHERE 1=1
+		ORDER BY pubdate desc
+	</select>
+	
+	<select id="getVideoListClickCnt" resultType="video" parameterType="video">
+		SELECT * 
+		FROM VIDEO 
+		WHERE 1=1
+		ORDER BY clickCnt desc
+	</select>
+	
+	<!-- 
+	public Video getVideoDetail(String title);
+	public void readCountup(String title);	
+	 -->
+	<select id="getVideoDetail" parameterType="string" resultType="video">
+		SELECT * 
+		FROM VIDEO v 
+		WHERE title = #{title}
+	</select>
+	
+	<update id="readCountup" parameterType="string">
+		UPDATE VIDEO 
+		SET CLICKCNT = CLICKCNT + 1
+		WHERE title = #{title}
+	</update>
+
+</mapper>
+
+
+
+                            

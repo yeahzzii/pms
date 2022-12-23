@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+   
+<mapper namespace="teamproject5.a01_Haeun.DAO.MemberDao">
+	<!-- 로그인/회원가입 -->	
+	<!--  
+	<select id="login" resultType="boolean" parameterType="member">
+		SELECT count(*)
+		FROM MEMBERS 
+		WHERE id=#{id}
+		AND pw =#{pw}
+	</select>
+	-->
+	<!-- 
+	<select id="login02" resultType="member">
+		SELECT id, pw
+		FROM MEMBERS 
+		WHERE id=#{id}
+		AND pw =#{pw}
+	</select>
+	-->
+	<!-- test _ login-->
+	<!--
+	<select id="getSelectOne" parameterType="member" resultType="member">
+		SELECT *
+		FROM MEMBERS 
+		WHERE id=#{id}
+		AND pw =#{pw}
+	</select>
+	-->
+	
+	<!-- test _ login-->
+	<select id="login" parameterType="member" resultType="int">
+		SELECT count(*)
+		FROM MEMBERS 
+		WHERE id=#{id}
+		AND pw =#{pw}
+	</select>
+	
+	<!-- test _ login02-->
+	<select id="login02" parameterType="member" resultType="member">
+		SELECT *
+		FROM MEMBERS 
+		WHERE id=#{id}
+		AND pw =#{pw}
+	</select>
+	
+	
+	<!-- 회원가입 -->
+	<!-- public Member insertMember(Member ins); -->
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO members values(#{id},#{pw},#{name}',#{phoneNum},#{birth},#{email})
+	</insert>
+	
+</mapper>

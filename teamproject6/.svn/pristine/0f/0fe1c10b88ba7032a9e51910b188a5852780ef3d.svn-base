@@ -1,0 +1,21 @@
+package teamproject5.a01_Jangho.a02_Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import teamproject5.a01_Jangho.a03_DAO.ProjectDao;
+import teamproject5.a01_Jangho.a04_VO.Product;
+
+
+@Service
+public class ProjectService {
+	@Autowired(required = false)
+	private ProjectDao dao;
+	
+	public List<Product> getProductList(Product sch){
+		
+		return dao.getProductList(sch);
+	}
+}

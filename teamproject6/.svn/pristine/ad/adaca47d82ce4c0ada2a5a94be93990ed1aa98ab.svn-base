@@ -1,0 +1,16 @@
+package teamproject5.a01_Jangho.a03_DAO;
+//teamproject5.a01_Jangho.a03_DAO.ProjectDao
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import teamproject5.a01_Jangho.a04_VO.Product;
+
+@Repository
+public interface JanghoDao {
+
+	public List<Product> getProductList(Product sch);
+	public Product getProduct();
+
+}

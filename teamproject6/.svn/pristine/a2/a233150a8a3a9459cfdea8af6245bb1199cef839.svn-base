@@ -1,0 +1,473 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    import="java.util.*"
+    %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath }"/>
+<fmt:requestEncoding value="utf-8"/>  
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+<link rel="stylesheet" href="${path }/a01_css/login.css">
+<link rel="stylesheet" href="${path }/a01_css/video2.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+/*body 초기화*/
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden; 
+}
+a{
+	text-decoration:none;
+	color:inherit;	
+}
+.banner{
+	padding: 50px 0 10px 0;
+	width: 320px;
+	height: 160px;
+}
+
+.CO2{
+	display: inline-block;
+	position: absolute;
+	left: 5%;
+	top: 120px;
+	width: 160px;
+	height: 70px;
+	z-index: 1;
+	
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  background: #ffffff;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#main-menu > li {
+  float: left;
+  position: relative;
+}
+
+#main-menu > li > a {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  display: block;
+  padding: 14px 50px;
+}
+
+#main-menu > li:hover{
+	border-bottom: 2px solid #000000;
+}
+
+#main-menu > li > a:hover{
+	color: rgb(210,210,210);
+}
+
+#sub-menu {
+  position: absolute;
+  background: rgba(61,61,61,0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.15s ease-in;
+}
+
+#sub-menu > li {
+  padding: 16px 20.5px;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+
+#sub-menu > li >  a {
+  color: rgb(210,210,210);
+  font-size: 15px;
+  text-decoration: none;
+}
+
+#main-menu > li:hover #sub-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+#sub-menu > li >  a:hover {
+ text-decoration: underline;
+}
+
+.btn_button{
+    position: absolute;    
+    top : 168px;           
+    right : 5%;           
+    margin : -50px 0 0 -150px;
+    width: 230px;
+    height: 60px;
+    border-radius: 75px;
+    color: #ffffff;
+}
+.btn_button .vol_guide{
+    margin: 10px;
+    height: 48px;
+    border-radius: 50px;
+    border: none;
+}
+    
+.btn_button .vol_guide > div{
+    position: relative;
+    width: 100px;
+    height:50px;
+    background: #00AAAD;
+    display: inline-block; *display: inline; *zoom: 1;
+    cursor: pointer;
+    transition: all 0.15s linear;
+}
+
+
+.btn_button .vol_guide .btn_login{
+    border-radius: 50px 0 0 50px;
+}
+
+.btn_button .vol_guide .btn_login:hover{
+	background-color: #ffffff;
+	color: #00AAAD;
+}
+
+.btn_button .vol_guide .btn_login > a{
+	display: block;
+	position: relative;
+	top: 12px;
+	text-align: center;
+}
+
+.btn_button .vol_guide .btn_join{
+    border-left: 2px soli;
+    border-radius: 0 50px 50px 0;
+}
+
+.btn_button .vol_guide .btn_join:hover{
+	background-color: #ffffff;
+	color: #00AAAD;
+}
+
+.btn_button .vol_guide .btn_join > a{
+
+	display: block;
+	position: relative;
+	top: 12px;
+	text-align: center;
+}    
+
+h2 ,h3 , p{
+	text-align:center;
+}
+h2{margin:50px 0 30px;}
+.main{
+    margin:100px 0 100px;
+	width: 570px;
+	
+}
+p{
+   margin-bottom:30px;
+}
+.wrap img{
+	display:block;
+	margin: 0 auto;
+}
+form{padding:20px;}
+form::after{
+	clear:both;
+	display:block;
+	content:'';
+}
+
+form .text{border:1px solid #ccc; margin-bottom: 50px; background-color: #fefefe; width:100%; height:150px; overflow-y: scroll;}
+
+form input{width: 100%; height:50px; margin-bottom: 20px;}
+#year{width:30%; height:50px;}
+#month{width:30%;height:50px;}
+#day{width:30%;height:50px;}
+
+.chcek06 input{
+	width:30%;
+}
+#nextBtn{display:block; margin:0 auto; padding: 10px 20px; margin: 0 auto 20px;}
+
+.title{
+	padding-bottom:50px;
+	text-align:center;
+	font-size:35px;
+	border:none;
+}
+.main{
+	height:100%;
+}
+.navi01{
+	width:80%;
+	margin: 50px 10px 50px 10px;
+	text-align:center;
+}
+
+
+
+.tab{width: 100%; border:1px solid #ccc;}
+.tab{border-bottom: none; align:center; text-align:center; display: flex; justify-content: centers}
+
+.tab li{ display:inline-block; width: 25%; padding:13px 0; font-size:13px; float:left; text-align: center; border-right:1px solid #ccc; border-bottom:1px solid #ccc;}
+
+.tab li:nth-child(1){border-bottom:none; color: #3c5fdf; }
+
+.search_bar{
+	width:80%;
+	height:70px;
+	margin:0 auto;
+	position:relative;
+	background-color:rgb(248,248,248);
+}
+
+.searching {
+}
+.data_page_cnt{
+	position:absolute;
+	display:block;
+	width:200px;
+	height:45px;
+	color:gray;
+	left:100px;
+	padding-top:25px;
+	
+}
+#range{
+	width:200px;
+	height:45px;
+	position:absolute;
+	right:980px;
+	top:10px;
+	color:gray;
+}
+#range:active{
+	border:2px solid black;
+}
+#search_input{
+	width:500px;
+	height:38px;
+	position:absolute;
+	right:400px;
+	top:10px;
+	padding-left:20px;
+}
+#search_img{
+	height:30px;
+	width:30px;
+	position:absolute;
+	right:320px;
+	top:13px;
+	cursor:pointer;
+	border:none;
+}
+#posting_btn{
+	width:80px;
+	height:40px;
+	position:absolute;
+	right:0px;
+	top:-50px;
+	cursor:pointer;
+	background-color:rgb(248,248,248);
+	border:1px solid gray;
+	border-radius:4px;
+}
+
+.list_container{
+	width: 100%; 
+	height:800px;
+	
+}
+.list_container_sub{
+	width: 80%; 
+	height:110%; 
+	margin:0 auto;
+	justify-content: centers
+	
+}
+.list_area{
+	width: 350px; 
+	height:30% ; 
+	float:left; 
+	margin: 30px 35px 30px 35px;
+	cursor:pointer;
+}
+.img_area{
+	width: 100%; 
+	height:50%;
+}
+.list_img{
+	width:298px;
+	height:auto;
+}
+.text_area{
+	width: 100%; 
+	height:50%;
+}
+.name_area{
+	width: 100%; 
+	height:90%;
+	}
+.content_type_area{
+	width: 100%;
+	height:20%;
+	font-size:15px;
+	}
+.content_type_area02{
+	font-size:15px;
+}
+.content_type{ 
+	width: 30%; 
+	height:20%; 
+	display:inline-block; 
+}
+.upload_date{
+	width: 50%; 
+	height:20%; 
+	display:inline-block; 
+	margin-left: 15%;
+	padding-left: 160px;
+}
+.data_cnt{
+	color:green;
+}
+
+.video_wrap{
+	text-align:center;
+	padding-left: 70px;
+}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</style>
+</head>
+
+<script type="text/javascript">
+/*
+function goPubdate(){
+	location.href="${path}/videoListPubdate.do";
+}
+
+function goClickcnt(){
+	location.href="${path}/videoListClickCnt.do";
+}
+*/
+function goMain(){
+	location.href="http://localhost:7080/teamproject5/videoList.do";
+}
+
+function goPubdate(){
+	location.href="http://localhost:7080/teamproject5/videoListPubdate.do";
+}
+
+function goClickcnt(){
+	location.href="http://localhost:7080/teamproject5/videoListClickCnt.do";
+}
+</script>
+<body>
+<img class="banner" src="./a00_img/banner.png" onclick="location.href='http://localhost:7080/teamproject5/a01_Yeji/main/main2.jsp'">
+<img class="CO2" src="./a00_img/CO2.JPG" onclick="location.href='http://localhost:7080/teamproject5/dataList.do'">
+<nav role="navigation">
+  <ul id="main-menu">
+    <li><a href="http://localhost:7080/teamproject5/a01_Yeji/fullcalendar-5.11.0/examples/selectable.html">마이페이지</a></li>
+    <li><a href="http://localhost:7080/teamproject5/videoList.do">영상자료</a></li>
+    <li><a href="http://localhost:7080/teamproject5/freeBoardList.do">자유게시판</a></li>
+    <li><a href="#">이벤트</a>
+      <ul id="sub-menu">
+        <li><a href="http://localhost:7080/teamproject5/cagList.do" aria-label="subemnu">퀴즈</a></li>
+        <li><a href="https://yjproject5.netlify.app/" aria-label="subemnu">성격유형테스트</a></li>
+      </ul>
+    </li>
+    <li><a href="http://localhost:7080/teamproject5/a01_Yeji/Store/list.jsp">감탄사굿즈</a></li>
+  </ul>
+</nav>
+
+<div class="btn_button">       
+    <div class="vol_guide">     
+        <div class="btn_login" onclick=""> 
+            <a href="http://localhost:7080/teamproject5/loginForm.do">로그인</a>
+        </div><!--
+     --><div class="btn_join" onclick="">  
+            <a href="http://localhost:7080/teamproject5/joinForm.do">회원가입</a>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+	<div class="navi01">
+		<ul class="tab">
+			<li>영상자료</li>
+			<li>데이터분석</li>
+			<li>환경용어</li>
+			<li>정부정책</li>
+		</ul>		
+	</div>
+	<div class="search_bar">
+		<span class="data_page_cnt">총 ${videoListPubdate.size()}<span class="data_cnt"></span>건</span>
+		<p class="searching">검색</p>
+		<div class="search">
+			<form>
+				<select id="range" name="range">
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="titleContent">제목+내용</option>
+				</select>
+				<input id="search_input" name="title" type="text" placeholder="검색어를 입력해주세요." value="${video.title}">
+				<input type="image" id="search_img" alt="search_img" src="./a00_img/search01.png">
+				
+				<div>
+					<button class="btn btn-info" type="button" onclick="goMain()" >홈</button>
+					<button class="btn btn-info" type="button" onclick="goPubdate()" >최신순</button>
+					<button class="btn btn-info" type="button" onclick="goClickcnt()" >조회순</button>
+				</div>
+			</form>
+		</div>	
+	</div><br><br>
+
+	<div class="list_container">
+		<div class="list_container_sub">
+			<div class="video_wrap">
+				<ul>
+					<c:forEach var="video" items="${videoListPubdate}">
+						<li>
+							<div class="list_area">
+								<iframe width="350" height="260" src="${video.video}"></iframe>
+								제목 |<a> ${video.title}</a><br>
+								날짜 |<a> <fmt:formatDate value="${video.pubdate}" type="both"/></a>
+							</div>
+						</li>
+					</c:forEach>					
+				</ul>
+			</div>
+					
+		</div>
+	</div>
+				
+				
+
+
+
+</body>
+</html>

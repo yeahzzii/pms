@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ <mapper namespace="teamproject5.a01_sechan.dao.BoardDao">
+	
+	
+	<select id="cagList" resultType="cag" parameterType="cag">
+		 select *
+	 	from category
+		 where 1=1
+	 	<if test="cag_id !=null">
+		 AND cag_id LIKE '%'||#{cag_id}||'%' 
+		 </if>
+		 order by cag_id
+	</select>
+	
+	<select id="getquizList" resultType="qz" parameterType="string">
+		select *
+	 	from quiz
+	 	where cag_id = 10
+	    AND pro_num = 1
+	</select>
+	
+	<select id="getquizList2" resultType="qz" parameterType="string">
+		select *
+	 	from quiz
+	 	where cag_id = 10
+	    AND pro_num = 2
+	</select>
+	
+	
+	<select id="getquizList3" resultType="qz" parameterType="string">
+		select *
+	 	from quiz
+	 	where cag_id = 10
+	    AND pro_num = 3
+	</select>
+	
+	<select id="getquizList4" resultType="qz" parameterType="string">
+		select *
+	 	from quiz
+	 	where cag_id = 10
+	    AND pro_num = 4
+	</select>
+	
+	<select id="getquizList5" resultType="qz" parameterType="string">
+		select *
+	 	from quiz
+	 	where cag_id = 10
+	    AND pro_num = 5
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+ </mapper>
+ 
+ 

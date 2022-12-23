@@ -1,0 +1,66 @@
+package teamproject5.a01_Jangho.a01_Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import teamproject5.a01_Jangho.a02_Service.JanghoService;
+import teamproject5.a01_Jangho.a04_VO.FreeBoard;
+
+@Controller
+public class JanghoController {
+	@Autowired(required = false)
+	private JanghoService service;
+	
+	// http://localhost:7080/teamproject5/freeBoardList.do
+	@RequestMapping("freeBoardList.do")
+	public String getFreeBoardList(FreeBoard sch, Model d) {
+		d.addAttribute("freeBoardList", service.getFreeBoardList(sch));
+		return "WEB-INF\\views\\Jangho01_freeBoardList.jsp";
+	}
+	
+	@RequestMapping("freeBoardInsertForm.do")
+	public String freeBoardInsertForm() {
+		return "WEB-INF\\views\\Jangho02_freeBoardInsert.jsp";
+	}
+	
+	@RequestMapping("freeBoardInsert.do")
+	public String freeBoardInsert(FreeBoard ins, Model d) {
+		service.insertFreeBoard(ins);
+		d.addAttribute("isInsert", "Y");
+		return "WEB-INF\\views\\Jangho02_freeBoardInsert.jsp";
+	}
+	
+	@RequestMapping("freeBoardDetail.do")
+	public String freeBoardDetail(@RequestParam("freeNum") int freeNum, Model d) {
+		d.addAttribute("freeboard", service.getFreeBoardDetail(freeNum));
+		
+		return "WEB-INF\\views\\Jangho03_freeBoardDetail.jsp";
+	}
+	
+	@RequestMapping("deleteFreeBoard.do")
+	public String deleteFreeBoard(@RequestParam("freeNum") int freeNum, Model d) {
+		System.out.println("삭제 : " + freeNum);
+		service.deleteFreeBoard(freeNum);
+		d.addAttribute("proc", "del");
+		
+		return "WEB-INF\\views\\Jangho03_freeBoardDetail.jsp";
+	}
+	
+	@RequestMapping("freeBoardDetailUpdate.do")
+	public String freeBoardDetailUpdate(@RequestParam("freeNum") int freeNum, Model d) {
+		d.addAttribute("freeboard", service.getFreeBoardDetailUpdate(freeNum));
+		
+		return "WEB-INF\\views\\Jangho04_freeBoardDetailUpdate.jsp";
+	}
+	
+	@RequestMapping("updateFreeBoard.do")
+	public String updateFreeBoard(FreeBoard upt, Model d) {
+		System.out.println("수정 : " + upt.getFreeTitle());
+		d.addAttribute("freeboard", service.updateFreeBoard(upt));
+		d.addAttribute("proc", "upt");
+		return "WEB-INF\\views\\Jangho04_freeBoardDetailUpdate.jsp";
+	}
+}

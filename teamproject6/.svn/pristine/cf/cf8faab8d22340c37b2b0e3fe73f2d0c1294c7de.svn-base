@@ -1,0 +1,20 @@
+package teamproject5.a01_sechan.Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import teamproject5.a01_sechan.DAO.ProjectDao;
+import teamproject5.a01_sechan.VO.Quiz;
+
+@Service
+public class ProjectService {
+	@Autowired(required=false)
+	private ProjectDao dao;
+	
+	public List<Quiz> getProblemlist(Quiz sch){
+		
+		return dao.getProblemlist(sch);
+	}
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="teamproject5.a01_Jangho.a03_DAO.JanghoDao">
+	<select id="getProductList" resultType="product">
+		select *
+		from product
+	</select>
+</mapper>

@@ -1,0 +1,51 @@
+package teamproject5.a01_sechan.VO;
+
+public class Quiz {
+	private String quizId;
+	private String problem;
+	private String ans;
+	private String cag_id;
+	private String ans_num;
+	public Quiz() {
+		// TODO Auto-generated constructor stub
+	}
+	public Quiz(String quizId, String problem, String ans, String cag_id, String ans_num) {
+		this.quizId = quizId;
+		this.problem = problem;
+		this.ans = ans;
+		this.cag_id = cag_id;
+		this.ans_num = ans_num;
+	}
+	public String getQuizId() {
+		return quizId;
+	}
+	public void setQuizId(String quizId) {
+		this.quizId = quizId;
+	}
+	public String getProblem() {
+		return problem;
+	}
+	public void setProblem(String problem) {
+		this.problem = problem;
+	}
+	public String getAns() {
+		return ans;
+	}
+	public void setAns(String ans) {
+		this.ans = ans;
+	}
+	public String getCag_id() {
+		return cag_id;
+	}
+	public void setCag_id(String cag_id) {
+		this.cag_id = cag_id;
+	}
+	public String getAns_num() {
+		return ans_num;
+	}
+	public void setAns_num(String ans_num) {
+		this.ans_num = ans_num;
+	}
+	
+	
+}
